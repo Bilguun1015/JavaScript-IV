@@ -24,6 +24,10 @@ class Instructor extends Person {
     grade(student,subject){
         console.log(`${student.name} receives a perfect score on ${subject}.`);
     }
+    gradingStudent(student){
+        return student.grade = Math.floor((Math.random()*100)+1);
+        
+    }
 }
 
 class Student extends Person{
@@ -32,6 +36,7 @@ class Student extends Person{
         this.previousBackground = attributesStudent.previousBackground;
         this.className = attributesStudent.className;
         this.favSubjects = attributesStudent.favSubjects;
+        this.grade = attributesStudent.grade;
     }
     listsSubjects(){
         console.log(`${this.name}'s favorite subjects are ${this.favSubjects}`);
@@ -41,6 +46,20 @@ class Student extends Person{
     }
     sprintChallenge(subject){
         console.log(`${this.name} has begun sprint challenge on ${subject}.`);
+    }
+    graduate(){
+        if(ron.grade >= 70 && henry.grade >= 70 ){
+             return `Congrats ${ron.name}, you are ready to graduate! Your final grade is ${ron.grade}. 
+            Congrats ${henry.name}, you are ready to graduate! Your final grade is ${henry.grade}.`;
+        } else if(ron.grade >= 70 && henry.grade < 70 ) {
+            return `Congrats ${ron.name}, you are ready to graduate! Your final grade is ${ron.grade}. 
+            You are almost there ${henry.name}, and your score is ${henry.grade}.`;
+        } else if( henry.grade >= 70 && ron.grade < 70 ){
+            return `Congrats ${henry.name}, you are ready to graduate! Your final grade is ${henry.grade}. 
+            You are almost there ${ron.name}, and your score is ${ron.grade}.`;
+        } else{
+            return `Keep trying! Your are almost there`;
+        }
     }
 }
 
@@ -57,6 +76,9 @@ class ProjectManagers extends Instructor {
         console.log(`${this.name} debugs ${student.name}'s code on ${subject}.`);
     }
 }
+
+
+//New objects are here
 
 const fred = new Instructor({
     name: 'Fred',
@@ -84,7 +106,8 @@ const fred = new Instructor({
     favLanguage: 'JavaScript',
     specialty: 'Back-End',
     catchPhrase: `JUST DO IT!`,
-    favSubjects: ['in-line block', 'fully responsive web design', 'js-class']
+    favSubjects: ['in-line block', 'fully responsive web design', 'js-class'],
+    grade: 90
   });
 
   const ron = new Student({
@@ -94,7 +117,8 @@ const fred = new Instructor({
     favLanguage: 'JavaScript',
     specialty: 'sleeping',
     catchPhrase: `Tachos are Nachos!`,
-    favSubjects: ['flexbox', 'class function', 'array methods']
+    favSubjects: ['flexbox', 'class function', 'array methods'],
+    grade: 80
   });
   
   const sean = new ProjectManagers({
@@ -114,6 +138,7 @@ const fred = new Instructor({
     specialty: 'calculations',
     catchPhrase: `tick tock tick tock, time is flying!`
   });
+
 
   fred.speak();
   dan.speak();
@@ -138,3 +163,10 @@ const fred = new Instructor({
 
   sean.debugsCode(ron,'js');
   lora.debugsCode(henry,'css');
+
+  console.log(fred.gradingStudent(ron));
+  console.log(dan.gradingStudent(henry));
+
+  console.log(ron.graduate());
+  console.log(henry.graduate());
+
